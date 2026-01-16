@@ -1,0 +1,40 @@
+---
+import Banner from "~/components/widgets/Banner.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import InfoSection from "~/components/widgets/contact/InfoSection.astro";
+import ContactForm from "~/components/widgets/contact/ContactForm.jsx";
+import MainSection from "~/components/widgets/contact/MainSection.astro";
+import LocationSection from "~/components/widgets/contact/LocationSection.astro";
+import ContactImg from "~/assets/images/contact-img.jpg";
+import { Image } from "astro:assets";
+
+const metadata = {
+  title: "Nous Contacter",
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Banner Widget -->
+  <Banner
+    title={metadata.title}
+    subtitle="Nous sommes là pour vous aider. N'hésitez pas à nous envoyer un message !"
+  >
+    <Image 
+      src={ContactImg} 
+      alt="Contact Us" 
+      class="w-full h-full object-cover absolute inset-0 border-0 z-0 scale-110 transition-transform duration-700"
+    />
+  </Banner>
+
+  <!-- Section principale -->
+  <MainSection>
+    <!-- Formulaire section -->
+    <ContactForm />
+
+    <!-- Section d'information -->
+    <InfoSection />
+  </MainSection>
+
+  <!-- Section de localisation -->
+  <LocationSection />
+</Layout>

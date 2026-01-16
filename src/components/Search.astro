@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Icon } from 'astro-icon/components';
+
+export interface Props extends HTMLAttributes<'div'> {
+  placeholder?: string;
+}
+
+const {
+  placeholder = "Rechercher...",
+  ...props
+} = Astro.props;
+---
+
+<div class="relative" {...props}>
+  <div id="autocomplete"></div>
+  <script type="module" src="/autocomplete.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic" />
+</div>

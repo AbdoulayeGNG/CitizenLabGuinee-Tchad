@@ -1,0 +1,46 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import HeroSection from "~/components/widgets/home/HeroSection.astro";
+import MissionSection from "~/components/widgets/home/MissionSection.astro";
+import ProjectSection from "~/components/widgets/home/ProjectSection.astro";
+import ActuSection from "~/components/widgets/home/ActuSection.astro";
+import EventSection from "~/components/widgets/home/EventSection.astro";
+import ParticipationSection from "~/components/widgets/home/ParticipationSection.astro";
+import TestimonySection from "~/components/widgets/home/TestimonySection.astro";
+import PartenaireSection from "~/components/widgets/home/PartenaireSection.astro";
+
+const metadata = {
+  title:
+    "Africtivistes CitizenLab Guinée 🇬🇳 — Votre plateforme d'informations citoyenne",
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section -->
+  <HeroSection />
+
+  <!-- Mission Section  -->
+  <MissionSection />
+
+  <!-- Featured Projects Section -->
+  <ProjectSection />
+
+  <!-- Latest News Section -->
+  <ActuSection />
+
+  <!-- Formation - Bootcamp Section -->
+  <EventSection />
+
+  <!-- Participation Section -->
+  <ParticipationSection />
+
+  <!-- Brands / Partners Section -->
+  <PartenaireSection/>
+
+  <!-- Testimony Section -->
+  <TestimonySection />
+
+</Layout>
+
+
