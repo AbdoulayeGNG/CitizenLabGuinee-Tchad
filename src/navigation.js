@@ -74,11 +74,11 @@ export const footerData = {
       title: "Nous Contacter",
       links: [
         {
-          text: "citizenlabguinee@africtivistes.org",
-          href: "mailto:citizenlabguinee@africtivistes.org ",
+          text: " acltchad@africtivistes.org",
+          href: "mailto: acltchad@africtivistes.org ",
         },
-        { text: "+224 611 111 111", href: "tel:+224611111111" },
-        { text: " Labé, Conakry, Guinée ", href: "#" },
+        { text: "+23563133529", href: "tel:+23563133529" },
+        { text: " WenakLabs, Avenue Nimery N’Djaména Tchad ", href: "WenakLabs, Avenue Nimery N’Djaména Tchad" },
       ],
     },
   ],
