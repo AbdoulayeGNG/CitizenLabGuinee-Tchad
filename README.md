@@ -1,11 +1,11 @@
-# 🇬🇳 CitizenLab Guinée
+# 🇹🇩 CitizenLab Tchad
 
-<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right" alt="CitizenLab Guinée Lighthouse Score" width="100" height="358">
+<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right" alt="CitizenLab Tchad Lighthouse Score" width="100" height="358">
 
-🌟 Plateforme de participation citoyenne pour la Guinée. 🌟
+🌟 Plateforme de participation citoyenne pour le Tchad. 🌟
 
-CitizenLab Guinée est une fabrique citoyenne numérique destinée à renforcer l'engagement civique en Guinée.
-La plateforme vise à informer, former, accompagner et outiller les acteurs de la société civile guinéenne à travers la diffusion d’informations fiables, le développement d’outils numériques, l’innovation et la co-création.
+CitizenLab Tchad est une fabrique citoyenne numérique destinée à renforcer l'engagement civique en Tchad.
+La plateforme vise à informer, former, accompagner et outiller les acteurs de la société civile Tchadienne à travers la diffusion d’informations fiables, le développement d’outils numériques, l’innovation et la co-création.
 
 - ✅ **Production-ready** scores in **PageSpeed Insights** reports.
 - ✅ Integration with **Tailwind CSS** supporting **Dark mode** and **_RTL_**.

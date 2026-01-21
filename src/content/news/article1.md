@@ -25,7 +25,7 @@ Les Civic Tech permettent aujourd’hui :
 
 Ces outils renforcent la transparence et l’implication des citoyens.
 
-## 3. Le rôle des organisations comme CitizenLab Guinée
+## 3. Le rôle des organisations comme CitizenLab Tchad
 
 CitizenLab joue un rôle clé dans l’accompagnement, la formation et la co-création avec les jeunes.  
 L’objectif : rendre la participation citoyenne **accessible, simple et inclusive**.

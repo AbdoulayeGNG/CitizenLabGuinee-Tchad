@@ -25,7 +25,7 @@ Plusieurs outils émergent :
 
 Ces solutions modernisent la relation entre citoyens et institutions.
 
-## 3. Le rôle stratégique de CitizenLab Guinée
+## 3. Le rôle stratégique de CitizenLab Tchad
 
 CitizenLab agit comme un hub d’innovation :
 - en formant des jeunes aux Civic Tech,
