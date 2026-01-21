@@ -17,7 +17,7 @@ Les droits numériques concernent :
 
 Ils garantissent une utilisation saine, sécurisée et responsable du numérique.
 
-## 2. Les défis rencontrés en Guinée
+## 2. Les défis rencontrés en Tchad
 
 Parmi les défis majeurs :
 - manque de sensibilisation,
@@ -28,7 +28,7 @@ Parmi les défis majeurs :
 
 Ces défis nécessitent des actions coordonnées.
 
-## 3. Comment CitizenLab Guinée contribue à leur promotion
+## 3. Comment CitizenLab Tchad contribue à leur promotion
 
 À travers des campagnes de sensibilisation, des formations et des productions médiatiques, CitizenLab œuvre pour :
 - informer les citoyens,
