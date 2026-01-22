@@ -3,7 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getAllMembers } from "~/utils/api";
 import Membres from "~/components/blog/Membres.astro";
 import { Image } from "astro:assets";
-import teamBanner from "~/assets/images/equipe.png";
+import teamBanner from "~/assets/images/third.jpg";
 
 const metadata = {
   title: 'Equipe - AfricTivistes CitizenLab Tchad',
@@ -19,7 +19,7 @@ const members = await getAllMembers();
     <div class="absolute inset-0">
       <Image
         src={teamBanner}
-        alt="Équipe CitizenLab Sénégal"
+        alt="Équipe CitizenLab Tchad"
         class="h-full w-full object-cover"
         width={1920}
         height={960}
@@ -34,7 +34,7 @@ const members = await getAllMembers();
         Une équipe engagée au service de la participation citoyenne
       </h1>
       <p class="max-w-3xl text-lg text-slate-100 sm:text-xl">
-        CitizenLab Guinée fédère une communauté de talents complémentaires—stratèges, créateurs de contenu, formateurs et activistes—
+        CitizenLab Tchad fédère une communauté de talents complémentaires—stratèges, créateurs de contenu, formateurs et activistes—
         réunis pour développer des solutions innovantes et renforcer la démocratie participative.
       </p>
     </div>
