@@ -1,3 +1,4 @@
+
 declare module 'astro:content' {
 	interface Render {
 		'.mdx': Promise<{
