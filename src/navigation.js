@@ -90,22 +90,22 @@ export const footerData = {
     //{ text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
   socialLinks: [
-    { icon: "tabler:brand-x", href: "https://x.com/citizenlab_GN/" },
+    { icon: "tabler:brand-x", href: "https://x.com/citizenlab_TD/" },
     {
       icon: "tabler:brand-instagram",
-      href: "https://www.instagram.com/africtivistescitizenlabguinee/",
+      href: "https://www.instagram.com/africtivistescitizenlabtchad?igsh=MWdxeTdrbDFhNWp1NQ==",
     },
     {
       icon: "tabler:brand-facebook",
-      href: "https://www.facebook.com/AfricTivistesCitizenLabGuinnee/",
+      href: "https://www.facebook.com/AfricTivistescitizenlabtchad",
     },
     {
       icon: "tabler:brand-linkedin",
-      href: "https://www.linkedin.com/company/aclabguinee?trk=public_post_follow-view-profile",
+      href: "https://www.linkedin.com/company/citizenlab-tchad/",
     },
     {
       icon: "tabler:brand-github",
-      href: "https://github.com/AfricTivistes/citizenlabguinee",
+      href: "https://github.com/AfricTivistes/citizenlabtchad",
     },
   ],
   footNote: `
