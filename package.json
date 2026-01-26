@@ -1,11 +1,11 @@
 {
-  "name": "citizenlab-senegal",
+  "name": "citizenlab-tchad",
   "version": "1.0.0",
   "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
-  "description": "CitizenLab Sénégal - Plateforme de participation citoyenne",
+  "description": "CitizenLab tchad - Plateforme de participation citoyenne",
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev",

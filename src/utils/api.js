@@ -2,7 +2,7 @@ export async function navQuery() {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
     console.log("Fetching menu from:", apiUrl);
 
     // Créer un AbortController pour gérer le timeout
@@ -88,7 +88,7 @@ export async function getNodeByURI(uri) {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
 
     // Créer un AbortController pour gérer le timeout
     const controller = new AbortController();
@@ -210,7 +210,7 @@ export async function getAllUris() {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
 
     let allUris = [];
     let afterCursor = null;
@@ -310,7 +310,7 @@ export async function getAllUris() {
 export async function findLatestPostsAPI() {
   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   try {
     // Créer un AbortController pour gérer le timeout
@@ -370,9 +370,9 @@ export async function findLatestPostsAPI() {
       {
         date: new Date().toISOString(),
         permalink: "/blog/actualites-citizenlab",
-        title: "Actualités CitizenLab Guinée",
+        title: "Actualités CitizenLab Tchad",
         excerpt:
-          "Découvrez les dernières actualités et activités de CitizenLab Guinée...",
+          "Découvrez les dernières actualités et activités de CitizenLab Tchad...",
         featuredImage: {
           node: {
             mediaItemUrl: "/assets/images/formation1.jpg",
@@ -386,7 +386,7 @@ export async function findLatestPostsAPI() {
       {
         date: new Date(Date.now() - 86400000).toISOString(),
         permalink: "/blog/participation-citoyenne",
-        title: "La Participation Citoyenne au Sénégal",
+        title: "La Participation Citoyenne au Tchad",
         excerpt:
           "Comment encourager et développer la participation citoyenne dans notre pays...",
         featuredImage: {
@@ -405,7 +405,7 @@ export async function findLatestPostsAPI() {
 export async function newsPagePostsQuery() {
   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   try {
     let allPosts = [];
@@ -488,9 +488,9 @@ export async function newsPagePostsQuery() {
       {
         date: new Date().toISOString(),
         permalink: "/blog/actualites-citizenlab",
-        title: "Actualités CitizenLab Guinée",
+        title: "Actualités CitizenLab Tchad",
         excerpt:
-          "Découvrez les dernières actualités et activités de CitizenLab Guinée...",
+          "Découvrez les dernières actualités et activités de CitizenLab Tchad...",
         featuredImage: {
           node: {
             mediaItemUrl: "/assets/images/formation1.jpg",
@@ -508,7 +508,7 @@ export async function newsPagePostsQuery() {
 export async function getAllMembers() {
   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   if (!apiUrl) {
     console.warn(
