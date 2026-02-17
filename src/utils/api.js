@@ -2,7 +2,7 @@ export async function navQuery() {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
     console.log("Fetching menu from:", apiUrl);
 
     // Créer un AbortController pour gérer le timeout
@@ -88,7 +88,7 @@ export async function getNodeByURI(uri) {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
 
     // Créer un AbortController pour gérer le timeout
     const controller = new AbortController();
@@ -210,7 +210,7 @@ export async function getAllUris() {
   try {
     const apiUrl =
       import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-      "https://citizenlab.africtivistes.org/guinee/graphql";
+      "https://citizenlab.africtivistes.org/tchad/graphql";
 
     let allUris = [];
     let afterCursor = null;
@@ -310,7 +310,7 @@ export async function getAllUris() {
 export async function findLatestPostsAPI() {
   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   try {
     // Créer un AbortController pour gérer le timeout
@@ -405,7 +405,7 @@ export async function findLatestPostsAPI() {
 export async function newsPagePostsQuery() {
   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   try {
     let allPosts = [];
@@ -506,13 +506,13 @@ export async function newsPagePostsQuery() {
 }
 
 export async function getAllMembers() {
-  const apiUrl =
+   const apiUrl =
     import.meta.env.PUBLIC_WORDPRESS_API_URL ||
-    "https://citizenlab.africtivistes.org/guinee/graphql";
+    "https://citizenlab.africtivistes.org/tchad/graphql";
 
   if (!apiUrl) {
     console.warn(
-      "PUBLIC_WORDPRESS_API_URL is not defined, returning empty array"
+      "PUBLIC_WORDPRESS_API_URL is not defined, returning empty array",
     );
     return [];
   }
@@ -532,10 +532,6 @@ export async function getAllMembers() {
                         }
                         }
                         title
-                        fonctions {
-                          equipe
-                          fonction
-                        }
                         social {
                           facebook
                           instagram
@@ -549,14 +545,18 @@ export async function getAllMembers() {
       }),
     });
 
-    const { data } = await response.json();
+    const jsonResponse = await response.json();
+    console.log("Réponse complète de l'API :", jsonResponse);
 
-    // Check if data.equipes exists and has nodes
+    if (jsonResponse.errors) {
+      console.error("Erreurs GraphQL :", jsonResponse.errors);
+    }
+
+    const { data } = jsonResponse;
     if (data && data.equipes && data.equipes.nodes) {
       return data.equipes.nodes;
     } else {
       console.error("No equipes data found in API response");
-      // Return an empty array as fallback
       return [];
     }
   } catch (error) {
@@ -608,6 +608,8 @@ export async function getActualitesPosts() {
   return json.data.posts.nodes;
 }
 
+// utils/api.js
+
 export async function getPodcastPosts() {
   const apiUrl = import.meta.env.PUBLIC_WORDPRESS_API_URL;
 
@@ -616,45 +618,75 @@ export async function getPodcastPosts() {
     return [];
   }
 
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
-        query PodcastPosts {
-          posts(
-            where: { categoryName: "Podcasts" }
-            first: 20
-          ) {
-            nodes {
-              id
-              slug
-              title
-              excerpt
-              content 
-              date
-              permalink: uri
-              featuredImage {
-                node {
-                  mediaItemUrl
-                  altText
+  console.log("🔍 Récupération des podcasts avec la catégorie: Podcast");
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
+          query PodcastPosts {
+            posts(
+              where: { categoryName: "Podcast" }
+              first: 20
+            ) {
+              nodes {
+                id
+                slug
+                title
+                excerpt
+                content
+                date
+                uri
+                permalink: uri
+                featuredImage {
+                  node {
+                    mediaItemUrl
+                    altText
+                  }
                 }
-              } 
-              categories {
-                nodes {
-                  name
-                  slug
+                categories {
+                  nodes {
+                    name
+                    slug
+                  }
                 }
               }
             }
           }
-        }
-      `,
-    }),
-  });
+        `
+      }),
+    });
 
-  const { data } = await response.json();
-  return data?.posts?.nodes || [];
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    
+    // Debug
+    console.log(" Réponse complète:", result);
+    
+    const podcasts = result.data?.posts?.nodes || [];
+    
+    console.log(`${podcasts.length} podcasts trouvés`);
+    
+    if (podcasts.length > 0) {
+      console.log(" Liste des podcasts:");
+      podcasts.forEach((p, i) => {
+        console.log(`   ${i+1}. ${p.title}`);
+      });
+    } else {
+      console.log("Aucun podcast trouvé avec la catégorie 'Podcast'");
+    }
+    
+    return podcasts;
+    
+  } catch (error) {
+    console.error("Erreur dans getPodcastPosts:", error.message);
+    return [];
+  }
 }
 
 export async function getLatestActualites(limit = 3) {
@@ -677,6 +709,7 @@ export async function getLatestActualites(limit = 3) {
           ) {
             nodes {
               title
+              content
               excerpt
               slug
               uri
@@ -704,19 +737,29 @@ export async function getLatestActualites(limit = 3) {
   const { data } = await response.json();
   return data?.posts?.nodes ?? [];
 }
+// utils/api.js
 export function extractAudioUrl(postContent) {
   if (!postContent) return "";
-
-  // On récupère le bloc <audio> ou <figure class="wp-block-audio">
-  const match = postContent.match(/<audio[\s\S]*?<\/audio>/);
-  if (match) return match[0];
-
-  // Si le thème utilise wp-block-audio
-  const wpAudioMatch = postContent.match(
-    /<figure class="wp-block-audio"[\s\S]*?<\/figure>/
-  );
-  if (wpAudioMatch) return wpAudioMatch[0];
-
+  
+  console.log("🔍 Recherche d'audio dans le contenu...");
+  
+  // Chercher différentes balises audio possibles
+  const patterns = [
+    /<audio[\s\S]*?src="([^"]*)"[\s\S]*?<\/audio>/i,
+    /<source[\s\S]*?src="([^"]*)"[\s\S]*?>/i,
+    /<iframe[\s\S]*?src="([^"]*)"[\s\S]*?<\/iframe>/i,
+    /https?:\/\/[^\s"']+\.(mp3|wav|ogg|m4a)/i
+  ];
+  
+  for (const pattern of patterns) {
+    const match = postContent.match(pattern);
+    if (match) {
+      console.log(" Audio trouvé:", match[1] || match[0]);
+      return match[1] || match[0];
+    }
+  }
+  
+  console.log("Aucun audio trouvé");
   return "";
 }
 export async function getAllActualites() {
@@ -733,6 +776,7 @@ export async function getAllActualites() {
           ) {
             nodes {
               title
+              content
               excerpt
               slug
               uri
@@ -757,4 +801,28 @@ export async function getAllActualites() {
   });
   const { data } = await response.json();
   return data?.posts?.nodes ?? [];
+}
+
+export async function getAllCategories() {
+  const apiUrl = import.meta.env.PUBLIC_WORDPRESS_API_URL;
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: `
+        query GetCategories {
+          categories(first: 50) {
+            nodes {
+              name
+              slug
+              count
+            }
+          }
+        }
+      `
+    })
+  });
+  const { data } = await response.json();
+  console.log(" Toutes les catégories:", data?.categories?.nodes);
+  return data?.categories?.nodes ?? [];
 }

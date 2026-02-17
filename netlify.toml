@@ -5,7 +5,7 @@
 [build.environment]
   NODE_VERSION = "18.19.0"
   NPM_FLAGS = "--prefer-offline --no-audit"
-  PUBLIC_WORDPRESS_API_URL = "https://citizenlab.africtivistes.org/senegal/graphql"
+  PUBLIC_WORDPRESS_API_URL = "https://citizenlab.africtivistes.org/tchad/graphql"
   SITE_URL = "https://citizenlabsenegal.netlify.app"
   SITE_NAME = "AfricTivistes CitizenLab Sénégal"
 
