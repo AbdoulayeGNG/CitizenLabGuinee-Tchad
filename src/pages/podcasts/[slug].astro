@@ -1,78 +1,62 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import podcast_bg from "~/assets/images/podcast_bg1.jpg";
-import Banner from "~/components/widgets/Banner.astro";
-import Podcastcard from "~/components/Podcasts/Podcastcard.astro";
-
-import { Image } from "astro:assets";
-
-
 import type { Podcast } from "~/types/podcasts";
 import { getPodcastPosts, extractAudioUrl } from "~/utils/api";
 
-const metadata = {
-  title: "Podcast - CitizenLab Guinée",
-  description:
-    "Découvrez nos podcasts inspirants sur l'engagement citoyen et le changement social",
-};
+export async function getStaticPaths() {
+  const posts = await getPodcastPosts();
 
-// Récupérer les données des podcasts
-const posts = await getPodcastPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
 
+const { post } = Astro.props;
+console.log("Post récupéré:", post);
 
-const podcasts : Podcast[] = posts.map((post) => ({
+const podcast: Podcast = {
   id: post.id,
-  slug : post.slug,
+  slug: post.slug,
   title: post.title,
-  episode: post.categories?.nodes?.[0]?.name ?? "Episode inconnu",
-  date: new Date(post.date).toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }),
+  episode: post.categories?.nodes?.[0]?.name ?? "Episode",
+  date: new Date(post.date).toLocaleDateString("fr-FR"),
   category: post.categories?.nodes?.[0]?.name ?? "Podcast",
   description: post.excerpt?.replace(/<[^>]+>/g, ""),
-  audioHtml: extractAudioUrl(post.content) ?? "", // contenu HTML complet avec <audio>
+  audioHtml: extractAudioUrl(post.content) ?? "",
   coverImage: post.featuredImage?.node?.mediaItemUrl ?? "",
-}));
-
+};
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Section -->
-  <Banner
-    title={metadata.title}
-    subtitle="Découvrez nos podcasts et contenus audio"
-  >
-    <Image
-      src={podcast_bg}
-      alt="Podcasts"
-      class="w-full h-full object-cover absolute inset-0 border-0 z-0 scale-110 transition-transform duration-700"
-    />
-  </Banner>
+<Layout
+  metadata={{
+    title: podcast.title,
+    description: podcast.description,
+  }}
+>
+  <section class="max-w-4xl mx-auto py-20 px-6">
+    <h1 class="text-4xl font-bold text-green-900 mb-4">
+      {podcast.title}
+    </h1>
 
-  <!-- Tous les épisodes -->
-  <section class="py-20 bg-gradient-to-b from-gray-50 via-white to-green-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-center justify-between mb-12">
-        <div>
-          <h2 class="text-4xl font-bold text-green-900 mb-2">
-            Tous les épisodes
-          </h2>
-          <p class="text-gray-600">Plongez dans l’univers de nos podcasts</p>
-        </div>
-      </div>
-      {
-        podcasts.length === 0 ? (
-          <p class="text-gray-600">Aucun podcast disponible pour le moment.</p>
-        ) : (
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {podcasts.map((podcast) => (
-              <Podcastcard podcast={podcast} />
-            ))}
-          </div>
-        )
-      }
+    <p class="text-gray-500 mb-6">
+      {podcast.date} · {podcast.category}
+    </p>
+
+    {podcast.coverImage && (
+      <img
+        src={podcast.coverImage}
+        alt={podcast.title}
+        class="rounded-xl mb-8"
+      />
+    )}
+
+    <div class="prose max-w-none mb-10">
+      <Fragment set:html={podcast.description} />
+    </div>
+
+    <div class="mt-6">
+      <Fragment set:html={podcast.audioHtml} />
     </div>
   </section>
 </Layout>
