@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { SITE } from '~/utils/config';
 import { getHomePermalink } from '~/utils/permalinks';
 import Logo from "~/assets/images/logo-tchad.jpg";
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 
 interface Link {
   text?: string;
@@ -21,28 +21,35 @@ export interface Props {
   links: Array<Links>;
   secondaryLinks: Array<Link>;
   socialLinks: Array<Link>;
-  footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { socialLinks = [], secondaryLinks = [], links = [], theme = 'light' } = Astro.props;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
-    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose bg-white dark:bg-slate-900']}>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- TOP -->
+    <div class="grid grid-cols-12 gap-8 py-10">
+
+      <!-- LOGO + DESCRIPTION -->
       <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>
-            <Image src={Logo} alt="Logo" width={150} height={40} />
-          </a>
-        </div>
-        <div class="text-sm text-muted">
+        <a class="inline-block mb-4" href={getHomePermalink()}>
+          <Image src={Logo} alt="Logo CitizenLab" width={160} height={50} />
+        </a>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
+          AfricTivistes CitizenLab œuvre pour promouvoir la participation citoyenne,
+          la transparence et l’engagement démocratique à travers l’innovation numérique.
+        </p>
+
+        <!-- Secondary Links (inchangés) -->
+        <div class="mt-4 text-sm">
           {
             secondaryLinks.map(({ text, href }) => (
               <a
-                class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out mr-2 rtl:mr-0 rtl:ml-2"
+                class="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition mr-3"
                 href={href}
                 set:html={text}
               />
@@ -50,16 +57,20 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
           }
         </div>
       </div>
+
+      <!-- LINKS DYNAMIQUES (inchangés) -->
       {
         links.map(({ title, links }) => (
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
-            {links && Array.isArray(links) && links.length > 0 && (
-              <ul class="text-sm">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-200 mb-4">
+              {title}
+            </h3>
+            {links?.length > 0 && (
+              <ul class="space-y-2 text-sm">
                 {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
+                  <li>
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition"
                       href={href}
                       aria-label={ariaLabel}
                     >
@@ -73,32 +84,38 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         ))
       }
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+
+    <!-- BOTTOM -->
+    <div class="border-t border-gray-200 dark:border-slate-700 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+      <!-- SOCIAL (inchangé) -->
       {
         socialLinks?.length ? (
-          <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+          <ul class="flex space-x-2">
+            {socialLinks.map(({ ariaLabel, href, icon }) => (
               <li>
                 <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                  class="text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-700 rounded-lg p-2 transition"
                   aria-label={ariaLabel}
                   href={href}
                   target="_blank"
                 >
                   {icon && <Icon name={icon} class="w-5 h-5" />}
-                  <Fragment set:html={text} />
                 </a>
               </li>
             ))}
           </ul>
-        ) : (
-          ''
-        )
+        ) : null
       }
 
-      <div class="text-sm mr-4 dark:text-slate-400">
-        <Fragment set:html={footNote} />
-      </div>
+      <!-- TEXTE INSTITUTIONNEL -->
+      <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-3xl">
+        Ce site web a été créé grâce au soutien du <strong>Digital Democracy Initiative</strong>
+        dans le cadre du projet <strong>Digitalise Youth</strong> et s’inscrit dans le programme
+        <strong>AfricTivistes CitizenLab</strong>, conçu et géré par <strong>AfricTivistes</strong>.
+      </p>
+
     </div>
+
   </div>
 </footer>
